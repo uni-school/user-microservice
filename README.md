@@ -12,7 +12,7 @@ user microservice is a service that manage user of uni school.
 go mod tidy
 ```
 
-- Step 3: Copy `<dev|stag|prod|test>`.application.yaml.example to `<dev|stag|prod|test>`.application.yaml. `NOTE`: choose one type env
+- Step 3: Copy `<dev|stag|prod|test>`.application.yaml.example to `<dev|stag|prod|test>`.application.yaml. `NOTE`: choose type dev
 
 - Step 4: Run
 
