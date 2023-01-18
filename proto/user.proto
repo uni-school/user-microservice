@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package user_microservice;
+
+option go_package = "/proto;user_microservice";
+
+// CreateUser
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  string role = 4;
+}
+message CreateUserResponse {
+  bool success = 1;
+  int64 statusCode = 2;
+  string status = 3;
+  string message = 4;
+  string error = 5;
+}
+
+service User {
+  rpc CreateUserV1 (CreateUserRequest) returns (CreateUserResponse);
+}
