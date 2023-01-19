@@ -1,6 +1,10 @@
 package util
 
-func UniqueSlice[T comparable](slices ...[]T) []T {
+import (
+	"github.com/imdario/mergo"
+)
+
+func MergeSlices[T comparable](slices ...[]T) []T {
 	uniqueMap := make(map[T]bool)
 
 	for _, slice := range slices {
@@ -16,4 +20,14 @@ func UniqueSlice[T comparable](slices ...[]T) []T {
 	}
 
 	return result
+}
+
+func MergeStructs[T comparable](structs ...T) T {
+	dst := new(T)
+
+	for _, s := range structs {
+		mergo.Merge(dst, s, mergo.WithOverride)
+	}
+
+	return *dst
 }
