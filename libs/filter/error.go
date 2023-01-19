@@ -10,6 +10,9 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
 	"github.com/uni-school/user-microservice/libs/response"
+
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func CustomHTTPErrorHandler(err error, ctx echo.Context) {
@@ -35,4 +38,21 @@ func CustomHTTPErrorHandler(err error, ctx echo.Context) {
 		return
 	}
 	ctx.JSON(http.StatusInternalServerError, response.ResponseFail(err.Error(), err))
+}
+
+func CustomGRPCErrorHandler(err error) error {
+	logrus.Infof("error type %T\n", err)
+	ve, ok := err.(validator.ValidationErrors)
+	if ok {
+		return status.Error(codes.InvalidArgument, ve.Error())
+	}
+	me, ok := err.(*json.MarshalerError)
+	if ok {
+		return status.Error(codes.InvalidArgument, me.Error())
+	}
+	re, ok := err.(runtime.Error)
+	if ok {
+		return status.Error(codes.InvalidArgument, re.Error())
+	}
+	return status.Error(codes.Internal, err.Error())
 }

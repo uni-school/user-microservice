@@ -5,9 +5,10 @@ import (
 )
 
 type DefaultConfig struct {
-	Apps     Apps     `mapstructure:"apps"`
-	Server   Server   `mapstructure:"server"`
-	Database Database `mapstructure:"database"`
+	Apps            Apps            `mapstructure:"apps"`
+	Server          Server          `mapstructure:"server"`
+	Database        Database        `mapstructure:"database"`
+	PasswordHashing PasswordHashing `mapstructure:"passwordHashing"`
 }
 
 type Apps struct {
@@ -34,4 +35,8 @@ type Datasource struct {
 
 type Database struct {
 	Postgres Datasource `mapstructure:"postgres"`
+}
+
+type PasswordHashing struct {
+	HashSalt int `mapstructure:"hashSalt"`
 }

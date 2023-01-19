@@ -4,7 +4,7 @@ gen-proto:
 
 gen-wire:
 	@echo "  >  Generate Wire..."
-	# wire wire/wire.go
+	wire wire/wire.go
 
 # START APP
 start-dev: gen-proto gen-wire

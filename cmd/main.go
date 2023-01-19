@@ -7,6 +7,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/uni-school/user-microservice/libs/config"
 	"github.com/uni-school/user-microservice/libs/constant"
+	"github.com/uni-school/user-microservice/shared/runner"
 	"github.com/uni-school/user-microservice/libs/util"
 	"github.com/uni-school/user-microservice/pkg/core"
 	pb "github.com/uni-school/user-microservice/proto"
@@ -18,6 +19,8 @@ import (
 func init() {
 	config.ConfigApps()
 	config.ConfigureDatabaseSQL(constant.POSTGRES)
+
+	runner.RunSeeder()
 }
 
 func main() {
@@ -32,7 +35,9 @@ func main() {
 
 	grpcServer := grpc.NewServer(opts...)
 
-	pb.RegisterUserServer(grpcServer, &core.Server{})
+	server := core.InitServer()
+
+	pb.RegisterUserServiceServer(grpcServer, server)
 	if env := util.GetEnvironmentType(); env == constant.TEST {
 		reflection.Register(grpcServer)
 	}

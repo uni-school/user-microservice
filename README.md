@@ -4,7 +4,11 @@ user microservice is a service that manage user of uni school.
 
 ## Installation
 
-- Step 1: Install all prerequisites on this [link](https://grpc.io/docs/languages/go/quickstart/#prerequisites)
+- Step 1: Install all prerequisites on this [link](https://grpc.io/docs/languages/go/quickstart/#prerequisites) and Install Wire by running
+
+```bash
+go install github.com/google/wire/cmd/wire@latest
+```
 
 - Step 2: Run
 
@@ -19,3 +23,8 @@ go mod tidy
 ```bash
 make start-dev
 ```
+
+## NOTE
+
+- Number 1: make sure you do all step in installation guide
+- Number 2: make sure in `<env>`.application.yaml variable passwordHashing.saltHash must have same value in file `<env>`.application.yaml on api-gateway

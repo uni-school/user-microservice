@@ -5,20 +5,35 @@ package user_microservice;
 option go_package = "/proto;user_microservice";
 
 // CreateUser
-message CreateUserRequestV1 {
+message CreateUserRequest {
   string name = 1;
   string email = 2;
   string password = 3;
   string role = 4;
 }
-message CreateUserResponseV1 {
-  bool success = 1;
-  int64 statusCode = 2;
-  string status = 3;
-  string message = 4;
-  string error = 5;
+message CreateUserResponse {
+  string message = 1;
 }
 
-service User {
-  rpc CreateUserV1 (CreateUserRequestV1) returns (CreateUserResponseV1);
+// GetUserByEmail
+message GetUserByEmailRequest {
+  string email = 1;
+}
+message GetUserByEmailResponse {
+  string message = 1;
+  GetUserByEmailResponseData data = 2;
+}
+message GetUserByEmailResponseData {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+  string role = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+  rpc GetUserByEmail (GetUserByEmailRequest) returns (GetUserByEmailResponse);
 }

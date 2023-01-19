@@ -15,3 +15,5 @@ database:
     maxIdleConnection: 5
     maxOpenConnection: 10
     debugMode: true
+passwordHashing:
+  saltHash: 14
