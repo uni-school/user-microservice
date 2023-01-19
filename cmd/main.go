@@ -17,15 +17,19 @@ import (
 
 func init() {
 	config.ConfigApps()
+	config.ConfigureDatabaseSQL(constant.POSTGRES)
 }
 
 func main() {
+	var (
+		opts []grpc.ServerOption
+	)
+
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%s", util.GetPortApp()))
 	if err != nil {
 		logrus.Fatalf("failed to listen: %v", err)
 	}
 
-	opts := []grpc.ServerOption{}
 	grpcServer := grpc.NewServer(opts...)
 
 	pb.RegisterUserServer(grpcServer, &core.Server{})

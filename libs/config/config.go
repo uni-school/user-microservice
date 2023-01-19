@@ -19,6 +19,7 @@ import (
 var (
 	AppConfig   *DefaultConfig
 	Environment constant.EnvironmentType
+	DB          *gorm.DB
 )
 
 func ConfigApps() {
@@ -54,11 +55,17 @@ func ConfigApps() {
 	AppConfig = &conf
 }
 
-func ConfigureDatabaseSQL(ds Datasource, dialect constant.DialectDatabaseType) *gorm.DB {
+func ConfigureDatabaseSQL(dialect constant.DialectDatabaseType) {
 	var (
+		ds Datasource
 		db  *gorm.DB
 		err error
 	)
+
+	switch dialect {
+	case constant.POSTGRES:
+		ds = AppConfig.Database.Postgres
+	}
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=require search_path=%s",
 		ds.Url,
@@ -100,5 +107,5 @@ func ConfigureDatabaseSQL(ds Datasource, dialect constant.DialectDatabaseType) *
 	sqlDb.SetMaxIdleConns(ds.MaxIdleConnection)
 	sqlDb.SetMaxOpenConns(ds.MaxOpenConnection)
 
-	return db
+	DB = db
 }

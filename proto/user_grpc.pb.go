@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserClient interface {
-	CreateUserV1(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
+	CreateUserV1(ctx context.Context, in *CreateUserRequestV1, opts ...grpc.CallOption) (*CreateUserResponseV1, error)
 }
 
 type userClient struct {
@@ -33,8 +33,8 @@ func NewUserClient(cc grpc.ClientConnInterface) UserClient {
 	return &userClient{cc}
 }
 
-func (c *userClient) CreateUserV1(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
-	out := new(CreateUserResponse)
+func (c *userClient) CreateUserV1(ctx context.Context, in *CreateUserRequestV1, opts ...grpc.CallOption) (*CreateUserResponseV1, error) {
+	out := new(CreateUserResponseV1)
 	err := c.cc.Invoke(ctx, "/user_microservice.User/CreateUserV1", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *userClient) CreateUserV1(ctx context.Context, in *CreateUserRequest, op
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility
 type UserServer interface {
-	CreateUserV1(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	CreateUserV1(context.Context, *CreateUserRequestV1) (*CreateUserResponseV1, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -54,7 +54,7 @@ type UserServer interface {
 type UnimplementedUserServer struct {
 }
 
-func (UnimplementedUserServer) CreateUserV1(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
+func (UnimplementedUserServer) CreateUserV1(context.Context, *CreateUserRequestV1) (*CreateUserResponseV1, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUserV1 not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
@@ -71,7 +71,7 @@ func RegisterUserServer(s grpc.ServiceRegistrar, srv UserServer) {
 }
 
 func _User_CreateUserV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateUserRequest)
+	in := new(CreateUserRequestV1)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ func _User_CreateUserV1_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: "/user_microservice.User/CreateUserV1",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).CreateUserV1(ctx, req.(*CreateUserRequest))
+		return srv.(UserServer).CreateUserV1(ctx, req.(*CreateUserRequestV1))
 	}
 	return interceptor(ctx, in, info, handler)
 }
