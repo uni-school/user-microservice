@@ -12,8 +12,8 @@ import (
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 
-	"github.com/uni-school/user-microservice/libs/constant"
-	"github.com/uni-school/user-microservice/libs/migration"
+	"github.com/uni-school/user-microservice/shared/constant"
+	"github.com/uni-school/user-microservice/shared/migration"
 )
 
 var (
@@ -57,7 +57,7 @@ func ConfigApps() {
 
 func ConfigureDatabaseSQL(dialect constant.DialectDatabaseType) {
 	var (
-		ds Datasource
+		ds  Datasource
 		db  *gorm.DB
 		err error
 	)

@@ -3,8 +3,8 @@ package util
 import (
 	"strconv"
 
-	"github.com/uni-school/user-microservice/libs/config"
-	"github.com/uni-school/user-microservice/libs/constant"
+	"github.com/uni-school/user-microservice/shared/config"
+	"github.com/uni-school/user-microservice/shared/constant"
 )
 
 func GetPortApp() string {

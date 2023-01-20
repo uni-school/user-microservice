@@ -5,10 +5,10 @@ import (
 	"net"
 
 	"github.com/sirupsen/logrus"
-	"github.com/uni-school/user-microservice/libs/config"
-	"github.com/uni-school/user-microservice/libs/constant"
+	"github.com/uni-school/user-microservice/shared/config"
+	"github.com/uni-school/user-microservice/shared/constant"
 	"github.com/uni-school/user-microservice/shared/runner"
-	"github.com/uni-school/user-microservice/libs/util"
+	"github.com/uni-school/user-microservice/shared/util"
 	"github.com/uni-school/user-microservice/pkg/core"
 	pb "github.com/uni-school/user-microservice/proto"
 	"google.golang.org/grpc/reflection"

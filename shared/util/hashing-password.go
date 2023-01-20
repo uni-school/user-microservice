@@ -1,7 +1,7 @@
 package util
 
 import (
-	"github.com/uni-school/user-microservice/libs/config"
+	"github.com/uni-school/user-microservice/shared/config"
 	"golang.org/x/crypto/bcrypt"
 )
 

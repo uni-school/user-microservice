@@ -3,7 +3,7 @@ package seed_user_postgres_repository
 import (
 	gorm_seeder "github.com/kachit/gorm-seeder"
 	"github.com/sirupsen/logrus"
-	"github.com/uni-school/user-microservice/libs/config"
+	"github.com/uni-school/user-microservice/shared/config"
 	"github.com/uni-school/user-microservice/pkg/model"
 	user_postgres_repository "github.com/uni-school/user-microservice/pkg/repository/postgres/user"
 	"github.com/uni-school/user-microservice/shared/constant"
