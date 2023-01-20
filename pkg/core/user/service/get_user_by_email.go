@@ -14,10 +14,10 @@ func (s *UserService) GetUserByEmail(payload *pb.GetUserByEmailRequest) (*pb.Get
 		return nil, err
 	}
 
-	userProtoGetResponse, err := util.ConvertToStruct[pb.GetUserByEmailResponseData](*userModelGetResult)
+	userProtoGetResponse, err := util.ConvertToStruct[*pb.GetUserByEmailResponseData](userModelGetResult)
 	if err != nil {
 		return nil, err
 	}
 
-	return &userProtoGetResponse, nil
+	return userProtoGetResponse, nil
 }
