@@ -7,14 +7,9 @@ import (
 )
 
 func (s *UserService) GetUserByEmail(payload *pb.GetUserByEmailRequest) (*pb.GetUserByEmailResponseData, error) {
-	userModelGetPayload, err := util.ConvertToStruct[model.User](model.User{
-		Email:    payload.GetEmail(),
+	userModelGetResult, err := s.UserResource.GetUser(nil, &model.User{
+		Email: payload.GetEmail(),
 	})
-	if err != nil {
-		return nil, err
-	}
-
-	userModelGetResult, err := s.UserResource.GetUser(nil, &userModelGetPayload)
 	if err != nil {
 		return nil, err
 	}
