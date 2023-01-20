@@ -12,6 +12,7 @@ require (
 	github.com/labstack/echo/v4 v4.10.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/viper v1.14.0
+	golang.org/x/crypto v0.4.0
 	google.golang.org/grpc v1.52.0
 	gorm.io/driver/postgres v1.4.6
 	gorm.io/gorm v1.24.3
@@ -42,7 +43,6 @@ require (
 	github.com/subosito/gotenv v1.4.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
-	golang.org/x/crypto v0.4.0 // indirect
 	golang.org/x/net v0.4.0 // indirect
 	golang.org/x/sys v0.3.0 // indirect
 	golang.org/x/text v0.5.0 // indirect
