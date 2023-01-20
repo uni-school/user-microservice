@@ -17,7 +17,8 @@ type Apps struct {
 }
 
 type Server struct {
-	Port int `mapstructure:"port"`
+	Host string `mapstructure:"host"`
+	Port int    `mapstructure:"port"`
 }
 
 type Datasource struct {

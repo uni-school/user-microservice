@@ -5,12 +5,12 @@ import (
 	"net"
 
 	"github.com/sirupsen/logrus"
+	"github.com/uni-school/user-microservice/pkg/core"
+	pb "github.com/uni-school/user-microservice/proto"
 	"github.com/uni-school/user-microservice/shared/config"
 	"github.com/uni-school/user-microservice/shared/constant"
 	"github.com/uni-school/user-microservice/shared/runner"
 	"github.com/uni-school/user-microservice/shared/util"
-	"github.com/uni-school/user-microservice/pkg/core"
-	pb "github.com/uni-school/user-microservice/proto"
 	"google.golang.org/grpc/reflection"
 
 	"google.golang.org/grpc"
@@ -28,7 +28,7 @@ func main() {
 		opts []grpc.ServerOption
 	)
 
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%s", util.GetPortApp()))
+	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%s", util.GetHostApp(), util.GetPortApp()))
 	if err != nil {
 		logrus.Fatalf("failed to listen: %v", err)
 	}
