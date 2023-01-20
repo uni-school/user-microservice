@@ -4,7 +4,7 @@ user microservice is a service that manage user of uni school.
 
 ## Installation
 
-- Step 1: Install all prerequisites on this [link](https://grpc.io/docs/languages/go/quickstart/#prerequisites) and Install Wire by running
+- Step 1: Install all GRPC prerequisites on this [link](https://grpc.io/docs/languages/go/quickstart/#prerequisites) and Install Wire by running
 
 ```bash
 go install github.com/google/wire/cmd/wire@latest
