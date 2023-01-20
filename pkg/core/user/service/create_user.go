@@ -1,11 +1,12 @@
 package service_user
 
 import (
-	"errors"
-
-	"github.com/uni-school/user-microservice/libs/util"
+	utilLibs "github.com/uni-school/user-microservice/libs/util"
 	"github.com/uni-school/user-microservice/pkg/model"
 	"github.com/uni-school/user-microservice/shared/constant"
+	"github.com/uni-school/user-microservice/shared/custom"
+	utilShared "github.com/uni-school/user-microservice/shared/util"
+	"google.golang.org/grpc/codes"
 	"gorm.io/gorm"
 
 	pb "github.com/uni-school/user-microservice/proto"
@@ -21,13 +22,18 @@ func (s *UserService) CreateUser(payload *pb.CreateUserRequest) error {
 		}
 	}
 	if userModelGetResult != nil {
-		return errors.New("user already registered")
+		return custom.NewCustomGRPCError(codes.AlreadyExists, "user already registered")
 	}
 
-	userModelCreatePayload, err := util.ConvertToStruct[model.User](model.User{
+	hashedPassword, err := utilShared.HashPassword(payload.GetPassword())
+	if err != nil {
+		return err
+	}
+
+	userModelCreatePayload, err := utilLibs.ConvertToStruct[model.User](model.User{
 		Name:     payload.GetName(),
 		Email:    payload.GetEmail(),
-		Password: payload.GetPassword(),
+		Password: hashedPassword,
 		Role:     constant.UserRole(payload.GetRole()),
 	})
 	if err != nil {

@@ -7,6 +7,7 @@ import (
 	"github.com/uni-school/user-microservice/pkg/model"
 	user_postgres_repository "github.com/uni-school/user-microservice/pkg/repository/postgres/user"
 	"github.com/uni-school/user-microservice/shared/constant"
+	"github.com/uni-school/user-microservice/shared/util"
 	"gorm.io/gorm"
 )
 
@@ -41,7 +42,7 @@ func (s *UsersSeeder) Seed(db *gorm.DB) error {
 			continue
 		}
 
-		hashedPassword, err := HashPassword(userSeed.Password)
+		hashedPassword, err := util.HashPassword(userSeed.Password)
 		if err != nil {
 			logrus.Println("error hashing password", err)
 			continue
