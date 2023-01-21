@@ -6,10 +6,18 @@ import (
 	"github.com/uni-school/user-microservice/shared/config"
 )
 
-func ExcecuteUserSeeder() {
+func ExcecuteUserSeeder(isWithClear bool) {
 	usersSeeder := InitUsersSeeder(gorm_seeder.SeederConfiguration{})
 	seedersStack := gorm_seeder.NewSeedersStack(config.DB)
 	seedersStack.AddSeeder(&usersSeeder)
+
+	if isWithClear {
+		err := seedersStack.Clear()
+		if err != nil {
+			logrus.Println(err)
+		}
+		logrus.Println("user seeder succesfully cleared")
+	}
 
 	err := seedersStack.Seed()
 	if err != nil {

@@ -3,5 +3,5 @@ package constant
 type TableName string
 
 const (
-	USER_TABLE_NAME = TableName("users")
+	POSTGRES_USER_TABLE_NAME = TableName("public.users")
 )

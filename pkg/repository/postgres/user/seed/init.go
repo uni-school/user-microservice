@@ -60,5 +60,5 @@ func (s *UsersSeeder) Seed(db *gorm.DB) error {
 }
 
 func (s *UsersSeeder) Clear(db *gorm.DB) error {
-	return s.SeederAbstract.Delete(db, string(constant.USER_TABLE_NAME))
+	return s.SeederAbstract.Delete(db, string(constant.POSTGRES_USER_TABLE_NAME))
 }

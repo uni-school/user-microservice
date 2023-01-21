@@ -5,5 +5,5 @@ import (
 )
 
 func RunSeeder() {
-	seed_user_postgres_repository.ExcecuteUserSeeder()
+	seed_user_postgres_repository.ExcecuteUserSeeder(false)
 }
