@@ -10,7 +10,7 @@ import (
 )
 
 func CustomGRPCErrorHandler(err error) error {
-	logrus.Infof("error type %T\n", err)
+	logrus.Infof("error: %#v\n", err)
 	ge, ok := err.(*CustomGRPCError)
 	if ok {
 		return status.Error(ge.StatusCode, ge.Error())
