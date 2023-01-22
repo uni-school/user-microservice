@@ -16,5 +16,8 @@ database:
     maxIdleConnection: 5
     maxOpenConnection: 10
     debugMode: true
+databaseSeeder:
+  user:
+    isRebuildData: false
 passwordHashing:
   saltHash: 14

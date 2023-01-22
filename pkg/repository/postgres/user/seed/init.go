@@ -3,9 +3,9 @@ package seed_user_postgres_repository
 import (
 	gorm_seeder "github.com/kachit/gorm-seeder"
 	"github.com/sirupsen/logrus"
-	"github.com/uni-school/user-microservice/shared/config"
 	"github.com/uni-school/user-microservice/pkg/model"
 	user_postgres_repository "github.com/uni-school/user-microservice/pkg/repository/postgres/user"
+	"github.com/uni-school/user-microservice/shared/config"
 	"github.com/uni-school/user-microservice/shared/constant"
 	"github.com/uni-school/user-microservice/shared/util"
 	"gorm.io/gorm"
@@ -49,6 +49,7 @@ func (s *UsersSeeder) Seed(db *gorm.DB) error {
 		}
 
 		user := model.User{
+			ID:       userSeed.ID,
 			Name:     userSeed.Name,
 			Email:    userSeed.Email,
 			Password: hashedPassword,
@@ -60,5 +61,5 @@ func (s *UsersSeeder) Seed(db *gorm.DB) error {
 }
 
 func (s *UsersSeeder) Clear(db *gorm.DB) error {
-	return s.SeederAbstract.Delete(db, string(constant.POSTGRES_USER_TABLE_NAME))
+	return db.Unscoped().Where("role = ?", constant.ADMIN).Delete(model.User{}).Error
 }

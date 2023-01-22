@@ -1,6 +1,7 @@
 package service_user
 
 import (
+	"github.com/uni-school/user-microservice/libs/types"
 	libs_util "github.com/uni-school/user-microservice/libs/util"
 	"github.com/uni-school/user-microservice/pkg/model"
 	"github.com/uni-school/user-microservice/shared/constant"
@@ -22,7 +23,11 @@ type (
 )
 
 func (s *UserService) CreateUser(payload *pb.CreateUserRequest) error {
-	userModelGetResult, err := s.UserResource.GetUser(nil, &model.User{
+	userModelGetResult, err := s.UserResource.GetUser(&types.Query{
+		SelectColumns: []string{
+			"id",
+		},
+	}, &model.User{
 		Email: payload.GetEmail(),
 	})
 	if err != nil {
