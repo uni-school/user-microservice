@@ -28,5 +28,4 @@ make start-dev
 ## NOTE
 
 - Number 1: make sure you do all step in installation guide
-- Number 2: make sure in `<env>`.application.yaml variable passwordHashing.saltHash must have same value in file `<env>`.application.yaml on api-gateway
-- Number 3: if you specify port of this grpc server, the server should be listening on `<server-host>`:`<server-port>`
+- Number 2: if you specify port of this grpc server, the server should be listening on `<server-host>`:`<server-port>`
