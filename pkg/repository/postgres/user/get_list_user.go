@@ -7,9 +7,9 @@ import (
 	"github.com/uni-school/user-microservice/pkg/model"
 )
 
-func (r *UserRepository) GetListUser(query *types.Query, payload *model.User) ([]model.User, error) {
+func (r *UserRepository) GetListUser(query *types.Query, payload *model.User) ([]*model.User, error) {
 	user := new(model.User)
-	users := make([]model.User, 0)
+	users := make([]*model.User, 0)
 
 	sql := r.db.Model(user)
 

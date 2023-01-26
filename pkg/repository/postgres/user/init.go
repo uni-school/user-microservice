@@ -9,7 +9,7 @@ import (
 type IUserRepository interface {
 	CreateUser(payload *model.User) error
 	GetUser(query *types.Query, payload *model.User) (*model.User, error)
-	GetListUser(query *types.Query, payload *model.User) ([]model.User, error)
+	GetListUser(query *types.Query, payload *model.User) ([]*model.User, error)
 }
 
 type UserRepository struct {

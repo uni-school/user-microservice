@@ -5,6 +5,6 @@ import (
 	"github.com/uni-school/user-microservice/pkg/model"
 )
 
-func (r *UserResource) GetListUser(query *types.Query, payload *model.User) ([]model.User, error) {
+func (r *UserResource) GetListUser(query *types.Query, payload *model.User) ([]*model.User, error) {
 	return r.Postgres.UserRepository.GetListUser(query, payload)
 }
