@@ -9,6 +9,7 @@ import (
 type IUserResource interface {
 	CreateUser(payload *model.User) error
 	GetUser(query *types.Query, payload *model.User) (*model.User, error)
+	GetListUser(query *types.Query, payload *model.User) ([]model.User, error)
 }
 
 type UserResource struct {

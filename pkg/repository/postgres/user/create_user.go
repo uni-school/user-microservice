@@ -5,15 +5,15 @@ import (
 )
 
 func (r *UserRepository) CreateUser(payload *model.User) error {
-	model := new(model.User)
+	user := new(model.User)
 
-	sql := r.db.Model(model)
+	sql := r.db.Model(user)
 
 	if payload != nil {
-		model = payload
+		user = payload
 	}
 
-	if err := sql.Create(model).Error; err != nil {
+	if err := sql.Create(user).Error; err != nil {
 		return err
 	}
 

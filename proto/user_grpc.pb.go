@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type UserServiceClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error)
+	GetListUserByRole(ctx context.Context, in *GetListUserByRoleRequest, opts ...grpc.CallOption) (*GetListUserByRoleResponse, error)
 }
 
 type userServiceClient struct {
@@ -52,12 +53,22 @@ func (c *userServiceClient) GetUserByEmail(ctx context.Context, in *GetUserByEma
 	return out, nil
 }
 
+func (c *userServiceClient) GetListUserByRole(ctx context.Context, in *GetListUserByRoleRequest, opts ...grpc.CallOption) (*GetListUserByRoleResponse, error) {
+	out := new(GetListUserByRoleResponse)
+	err := c.cc.Invoke(ctx, "/user_microservice.UserService/GetListUserByRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error)
+	GetListUserByRole(context.Context, *GetListUserByRoleRequest) (*GetListUserByRoleResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedUserServiceServer) CreateUser(context.Context, *CreateUserReq
 }
 func (UnimplementedUserServiceServer) GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserByEmail not implemented")
+}
+func (UnimplementedUserServiceServer) GetListUserByRole(context.Context, *GetListUserByRoleRequest) (*GetListUserByRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetListUserByRole not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -120,6 +134,24 @@ func _UserService_GetUserByEmail_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_GetListUserByRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetListUserByRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetListUserByRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/user_microservice.UserService/GetListUserByRole",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetListUserByRole(ctx, req.(*GetListUserByRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserByEmail",
 			Handler:    _UserService_GetUserByEmail_Handler,
+		},
+		{
+			MethodName: "GetListUserByRole",
+			Handler:    _UserService_GetListUserByRole_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

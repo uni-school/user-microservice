@@ -7,8 +7,9 @@ import (
 	"github.com/uni-school/user-microservice/pkg/model"
 )
 
-func (r *UserRepository) GetUser(query *types.Query, payload *model.User) (*model.User, error) {
+func (r *UserRepository) GetListUser(query *types.Query, payload *model.User) ([]model.User, error) {
 	user := new(model.User)
+	users := make([]model.User, 0)
 
 	sql := r.db.Model(user)
 
@@ -19,17 +20,14 @@ func (r *UserRepository) GetUser(query *types.Query, payload *model.User) (*mode
 	}
 
 	if payload != nil {
-		if payload.ID != "" {
-			sql = sql.Where("id = ?", payload.ID)
-		}
-		if payload.Email != "" {
-			sql = sql.Where("email = ?", payload.Email)
+		if payload.Role != "" {
+			sql = sql.Where("role = ?", payload.Role)
 		}
 	}
 
-	if err := sql.First(user).Error; err != nil {
+	if err := sql.Find(&users).Error; err != nil {
 		return nil, err
 	}
 
-	return user, nil
+	return users, nil
 }

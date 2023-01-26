@@ -8,6 +8,7 @@ import (
 type IUserService interface {
 	CreateUser(payload *pb.CreateUserRequest) error
 	GetUserByEmail(payload *pb.GetUserByEmailRequest) (*pb.GetUserByEmailResponseData, error)
+	GetListUserByRole(payload *pb.GetListUserByRoleRequest) ([]*pb.GetListUserByRoleResponseData, error)
 }
 
 type UserService struct {
