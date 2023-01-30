@@ -5,18 +5,10 @@ import (
 )
 
 func MergeSlices[T comparable](slices ...[]T) []T {
-	uniqueMap := make(map[T]bool)
+	result := make([]T, 0)
 
-	for _, slice := range slices {
-		for _, val := range slice {
-			uniqueMap[val] = true
-		}
-	}
-
-	result := make([]T, 0, len(uniqueMap))
-
-	for key := range uniqueMap {
-		result = append(result, key)
+	for _, s := range slices {
+		result = append(result, s...)
 	}
 
 	return result
