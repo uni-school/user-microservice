@@ -23,7 +23,7 @@ type Server struct {
 }
 
 type Datasource struct {
-	Url               string        `mapstructure:"url"`
+	Host              string        `mapstructure:"host"`
 	Port              string        `mapstructure:"port"`
 	DatabaseName      string        `mapstructure:"databaseName"`
 	Username          string        `mapstructure:"username"`

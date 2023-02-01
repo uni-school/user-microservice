@@ -68,7 +68,7 @@ func ConfigureDatabaseSQL(dialect constant.DialectDatabaseType) {
 	}
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=require search_path=%s",
-		ds.Url,
+		ds.Host,
 		ds.Username,
 		ds.Password,
 		ds.DatabaseName,
