@@ -6,7 +6,7 @@ import (
 	"github.com/uni-school/user-microservice/shared/config"
 )
 
-func ExcecuteUserSeeder(isWithClear bool) {
+func ExecuteUserSeeder(isWithClear bool) {
 	usersSeeder := InitUsersSeeder(gorm_seeder.SeederConfiguration{})
 	seedersStack := gorm_seeder.NewSeedersStack(config.DB)
 	seedersStack.AddSeeder(&usersSeeder)

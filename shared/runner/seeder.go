@@ -6,5 +6,5 @@ import (
 )
 
 func RunSeeder() {
-	seed_user_postgres_repository.ExcecuteUserSeeder(config.AppConfig.DatabaseSeeder.User.IsRebuildData)
+	seed_user_postgres_repository.ExecuteUserSeeder(config.AppConfig.DatabaseSeeder.User.IsRebuildData)
 }
